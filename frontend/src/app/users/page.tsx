@@ -21,21 +21,19 @@ function LoginPage() {
   
     try {
       if (isLoginMode) {
-        // Não deve enviar o campo 'name' no login
         const response = await axios.post('http://localhost:3001/users/login', { email, password });
         setSuccess('Login bem-sucedido!');
+        window.location.href = '/upload'; // Redireciona para /upload após o login bem-sucedido
       } else {
-        // Envia 'name' somente no cadastro
         const response = await axios.post('http://localhost:3001/users', { email, password, name });
         setSuccess('Cadastro bem-sucedido! Agora faça login.');
       }
       setLoading(false);
     } catch (error: any) {
-      setError('Erro ao processar: ' + (error.response?.data?.message || error.message));
+      setError('O login falhou. Verifique suas credenciais.' + (error.response?.data?.message || error.message));
       setLoading(false);
     }
   };
-  
 
   return (
     <div className={styles.container}>

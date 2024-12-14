@@ -1,16 +1,12 @@
-/* upload.module.css */
-
-/* Fundo geral da página com um tom escuro */
 .pageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #121212;
-  color: #e0e0e0; /* Texto em tom claro para contraste */
+  color: #e0e0e0;
 }
 
-/* Container do upload com fundo levemente mais claro */
 .uploadContainer {
   background-color: #1e1e1e;
   padding: 40px;
@@ -21,46 +17,51 @@
   max-width: 600px;
 }
 
-/* Título com cor de destaque */
 .title {
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff; /* Branco puro para título */
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
-/* Caixa de upload com borda e fundo mais suaves */
 .uploadBox {
   border: 2px dashed #76a9fa;
   padding: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
-  cursor: pointer;
   background-color: #2c2c2c;
+  position: relative;
+}
+
+.fileInputWrapper {
+  position: relative;
+  width: 100%;
 }
 
 .fileInput {
+  opacity: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
   position: absolute;
+  top: 0;
+  left: 0;
   cursor: pointer;
 }
 
 .uploadInfo {
   text-align: center;
+  pointer-events: none; /* Para garantir que o texto não receba clique */
 }
 
 .filePrompt {
-  color: #bbbbbb; /* Texto de dica em tom claro */
+  color: #bbbbbb;
 }
 
 .fileName {
   font-size: 16px;
-  color: #76a9fa; /* Azul claro para o nome do arquivo */
+  color: #76a9fa;
 }
 
-/* Botão de upload com fundo mais vibrante */
 .uploadButton {
   background-color: #76a9fa;
   color: #121212;
@@ -79,10 +80,9 @@
 }
 
 .uploadButton:hover {
-  background-color: #508fda; /* Azul mais escuro no hover */
+  background-color: #508fda;
 }
 
-/* Barra de progresso com fundo escuro e barra azul */
 .progressBar {
   background-color: #333333;
   border-radius: 10px;
@@ -114,7 +114,21 @@
 
 .resultText {
   font-size: 16px;
-  color: #cccccc; /* Texto da explicação em cinza claro */
+  color: #cccccc;
+}
+
+.fileLinkContainer {
+  margin-top: 20px;
+}
+
+.fileLink {
+  font-size: 16px;
+  color: #76a9fa;
+  text-decoration: none;
+}
+
+.fileLink:hover {
+  text-decoration: underline;
 }
 
 .error {
