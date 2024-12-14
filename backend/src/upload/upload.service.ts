@@ -1,49 +1,53 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import * as Tesseract from 'tesseract.js';
-
+import axios from 'axios';
+import * as Tesseract from 'tesseract.js'; 
 
 @Injectable()
 export class UploadService {
-  constructor(private prisma: PrismaService) {}
+  private huggingFaceApiKey = process.env.HUGGING_FACE_API_KEY;  
 
+  async extractTextFromImage(imageBuffer: Buffer): Promise<string> {
+    try {
+      const { data: { text } } = await Tesseract.recognize(imageBuffer, 'eng');
+      return text;
+    } catch (error) {
+      console.error('Erro ao extrair texto da imagem:', error);
+      throw new Error('Erro ao extrair texto da imagem');
+    }
+  }  
 
   async extractText(file: Express.Multer.File): Promise<string> {
-    const result = await Tesseract.recognize(file.buffer, 'eng');
-    return result.data.text;
+    return 'Texto extraído fictício';
   }
 
+  async getExplanation(extractedText: string): Promise<string> {
+    const prompt = `Explique o seguinte texto extraído de um documento: ${extractedText}`;
 
-  async getExplanation(text: string): Promise<string> {
+    try {
+      const response = await axios.post(
+        'https://api-inference.huggingface.co/models/gpt2',  
+        {
+          inputs: prompt,  
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.huggingFaceApiKey}`, 
+            'Content-Type': 'application/json',
+          },
+        },
+      );
 
+      const explanation = response.data[0]?.generated_text?.trim();
 
-    const response = await fetch('https://api.openai.com/v1/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer SEU_TOKEN_API_OPENAI`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        prompt: `Explique o seguinte texto: "${text}"`,
-        max_tokens: 300,
-      }),
-    });
+      if (!explanation) {
+        throw new Error('Não foi possível obter a explicação.');
+      }
 
-
-    const data = await response.json();
-    return data.choices[0].text.trim();
+      console.log('Explicação:', explanation);  
+      return explanation;
+    } catch (error) {
+      console.error('Erro ao obter explicação:', error);
+      throw new Error('Erro ao obter explicação');
+    }
   }
-
-
- 
-  async saveDocument(userId: number, filePath: string, extractedText: string): Promise<void> {
-    await this.prisma.document.create({
-      data: {
-        userId,
-        filePath,  
-        extractedText,
-      },
-    });
-  }
-}  
+}
