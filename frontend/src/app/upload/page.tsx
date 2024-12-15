@@ -10,15 +10,17 @@ export default function UploadPage() {
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [fileUrl, setFileUrl] = useState<string | null>(null);  // URL da imagem após o upload
-  const [showModal, setShowModal] = useState<boolean>(false);  // Estado para controlar o modal
+  const [fileUrl, setFileUrl] = useState<string | null>(null);  
+  const [ocrText, setOcrText] = useState<string | null>(null);  // Estado para armazenar o texto extraído
+  const [showModal, setShowModal] = useState<boolean>(false);  
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
       setError(null);
       setProgress(null);
-      setFileUrl(null);  // Limpar a URL quando um novo arquivo for selecionado
+      setFileUrl(null);  
+      setOcrText(null);  // Limpa o texto OCR quando um novo arquivo for selecionado
     }
   };
 
@@ -30,10 +32,10 @@ export default function UploadPage() {
 
     setLoading(true);
     setError(null);
-    setFileUrl(null);  // Limpar a URL ao iniciar o upload
+    setFileUrl(null);  
 
     const formData = new FormData();
-    formData.append('file', file);  // O 'file' deve ser o mesmo nome do campo no backend
+    formData.append('file', file);  
     
     try {
       const response = await axios.post('http://localhost:3001/uploads/image', formData, {
@@ -48,11 +50,11 @@ export default function UploadPage() {
         },
       });
 
-      // Atualiza o estado com a URL do arquivo
-      const filePath = `http://localhost:3001/uploads/image/${response.data.filename}`; // Supondo que o backend retorna o 'filename'
-      setFileUrl(filePath);  // Caminho completo da imagem
+      const filePath = `http://localhost:3001/uploads/image/${response.data.filename}`; 
+      setFileUrl(filePath);  
+      setOcrText(response.data.text);  // Atualiza o estado com o texto extraído
       setLoading(false);
-      setShowModal(true);  // Exibe o modal após o upload
+      setShowModal(true);  
 
     } catch (error) {
       setError((error as Error).message || 'Erro ao fazer upload do arquivo. Tente novamente.');
@@ -61,12 +63,11 @@ export default function UploadPage() {
   };
 
   const closeModal = () => {
-    setShowModal(false);  // Fecha o modal quando clicado
+    setShowModal(false);  
   };
 
   return (
     <div>
-      {/* NavBar incluída no topo da página */}
       <NavBar />  
       
       <div className={styles.pageContainer}>
@@ -97,9 +98,16 @@ export default function UploadPage() {
           )}
           {error && <p className={styles.error}>{error}</p>}
         </div>
+        
+        {/* Exibindo o texto OCR se disponível */}
+        {ocrText && (
+          <div className={styles.ocrResult}>
+            <h2>Texto Extraído:</h2>
+            <p>{ocrText}</p>
+          </div>
+        )}
       </div>
 
-      {/* Modal para mostrar a imagem */}
       {showModal && fileUrl && (
         <div className={styles.modal} onClick={closeModal}>
           <div className={styles.modalContent}>

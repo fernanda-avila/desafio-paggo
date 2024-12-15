@@ -6,7 +6,6 @@ import { join } from 'path';
 export class ImageController {
   @Get('image/:imgpath')
   getImage(@Param('imgpath') image: string, @Res() res: Response) {
-    // Ajuste o caminho para o diretório correto onde as imagens estão
-    return res.sendFile(join(__dirname, '..', '..', 'uploads', 'image', image)); // Caminho correto
+    return res.sendFile(join(__dirname, '..', '..', 'uploads', 'image', image));
   }
 }
