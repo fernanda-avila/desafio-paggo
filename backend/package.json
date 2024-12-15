@@ -12,7 +12,8 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
-    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/platform-express": "^9.4.3",
+    "@nestjs/serve-static": "^4.0.2",
     "@prisma/client": "^4.0.0",
     "@types/tesseract.js": "^2.0.0",
     "axios": "^1.7.9",
@@ -20,6 +21,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.7",
+    "multer": "^1.4.5-lts.1",
     "prisma": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.0",

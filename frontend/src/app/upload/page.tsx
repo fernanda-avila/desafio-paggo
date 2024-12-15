@@ -10,7 +10,8 @@ export default function UploadPage() {
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);  // URL da imagem após o upload
+  const [showModal, setShowModal] = useState<boolean>(false);  // Estado para controlar o modal
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -48,13 +49,19 @@ export default function UploadPage() {
       });
 
       // Atualiza o estado com a URL do arquivo
-      setFileUrl(response.data.filePath);  // Caminho do arquivo retornado
+      const filePath = `http://localhost:3001/uploads/image/${response.data.filename}`; // Supondo que o backend retorna o 'filename'
+      setFileUrl(filePath);  // Caminho completo da imagem
       setLoading(false);
+      setShowModal(true);  // Exibe o modal após o upload
 
     } catch (error) {
       setError((error as Error).message || 'Erro ao fazer upload do arquivo. Tente novamente.');
       setLoading(false);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);  // Fecha o modal quando clicado
   };
 
   return (
@@ -70,7 +77,7 @@ export default function UploadPage() {
               type="file"
               onChange={handleFileChange}
               className={styles.fileInput}
-              accept=".pdf, .png, .jpg, .jpeg"
+              accept=".png, .jpg, .jpeg"
             />
             <div className={styles.uploadInfo}>
               {file ? (
@@ -89,16 +96,18 @@ export default function UploadPage() {
             </div>
           )}
           {error && <p className={styles.error}>{error}</p>}
-          {fileUrl && (
-            <div className={styles.fileLinkContainer}>
-              <h2 className={styles.resultTitle}>Visualize seu Arquivo:</h2>
-              <a href={fileUrl} target="_blank" rel="noopener noreferrer" className={styles.fileLink}>
-                Clique aqui para visualizar o arquivo
-              </a>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Modal para mostrar a imagem */}
+      {showModal && fileUrl && (
+        <div className={styles.modal} onClick={closeModal}>
+          <div className={styles.modalContent}>
+            <span className={styles.close}>&times;</span>
+            <img src={fileUrl} alt="Imagem carregada" className={styles.modalImage} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

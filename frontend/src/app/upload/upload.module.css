@@ -135,3 +135,54 @@
   color: #ff6b6b;
   margin-top: 15px;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Opacidade aumentada para melhorar o contraste */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px; /* Adicionado para não ficar colado nas bordas */
+  box-sizing: border-box; /* Para garantir o padding não afete o layout */
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 80%; /* Ajuste de largura para ficar com boa aparência */
+  max-width: 600px; /* Limita o tamanho máximo da modal */
+  max-height: 80%; /* Limita a altura da imagem */
+  overflow: auto; /* Permite rolar se a imagem for maior que a altura disponível */
+  box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
+}
+
+.modalImage {
+  width: 100%; /* Faz a imagem ocupar toda a largura disponível */
+  height: auto; /* Garante que a altura da imagem seja ajustada proporcionalmente */
+  max-height: 100%; /* Limita a altura da imagem para não ultrapassar o limite da modal */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #121212;
+  background-color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.close:hover {
+  background-color: #ddd;
+}

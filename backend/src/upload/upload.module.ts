@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
-import { UploadController } from './upload-controller';  // Corrija o nome se necessário
+import { UploadController } from './upload.controller';  // Verifique o nome e o caminho do arquivo
 import { PrismaModule } from '../../prisma/prisma.module';
 
 @Module({
