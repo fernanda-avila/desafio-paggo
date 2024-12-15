@@ -17,7 +17,7 @@ export default function NavBar() {
       <div className={styles.logo}>
         <a href="/">
           <Image
-            src="/path-to-your-logo.png"
+            src="logo.png"
             alt="Logo"
             width={50}
             height={50}
