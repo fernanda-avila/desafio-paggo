@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import NavBar from '../navBar/page';  // Importe o NavBar
+import NavBar from '../navBar/page'; 
+import axios from 'axios';  
 import styles from './upload.module.css';
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState<number | null>(null);
-  const [explanation, setExplanation] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [userId, setUserId] = useState<number>(1);  // Defina o userId conforme necessário
-  const [fileUrl, setFileUrl] = useState<string | null>(null);  // Estado para armazenar a URL do arquivo
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -30,28 +29,30 @@ export default function UploadPage() {
 
     setLoading(true);
     setError(null);
-    setExplanation(null);
+    setFileUrl(null);  // Limpar a URL ao iniciar o upload
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('userId', userId.toString());  // Envia o userId corretamente
-
+    formData.append('file', file);  // O 'file' deve ser o mesmo nome do campo no backend
+    
     try {
-      const response = await fetch('http://localhost:3001/documents', {
-        method: 'POST',
-        body: formData,
+      const response = await axios.post('http://localhost:3001/uploads/image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',  
+        },
+        onUploadProgress: (progressEvent: any) => {
+          if (progressEvent.total) {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setProgress(percent);  
+          }
+        },
       });
 
-      if (!response.ok) {
-        throw new Error('Erro ao fazer upload do documento.');
-      }
-
-      const data = await response.json();
-      setExplanation(data.explanation);
-      setFileUrl(data.filePath);  // Armazenar a URL do arquivo retornada do backend
+      // Atualiza o estado com a URL do arquivo
+      setFileUrl(response.data.filePath);  // Caminho do arquivo retornado
       setLoading(false);
+
     } catch (error) {
-      setError((error as Error).message || 'Erro ao fazer upload do documento. Tente novamente.');
+      setError((error as Error).message || 'Erro ao fazer upload do arquivo. Tente novamente.');
       setLoading(false);
     }
   };
@@ -63,7 +64,7 @@ export default function UploadPage() {
       
       <div className={styles.pageContainer}>
         <div className={styles.uploadContainer}>
-          <h1 className={styles.title}>Envie seu Documento</h1>
+          <h1 className={styles.title}>Envie seu Arquivo</h1>
           <div className={styles.uploadBox}>
             <input
               type="file"
@@ -80,7 +81,7 @@ export default function UploadPage() {
             </div>
           </div>
           <button onClick={handleUpload} className={styles.uploadButton} disabled={loading}>
-            {loading ? 'Processando...' : 'Enviar Documento'}
+            {loading ? 'Processando...' : 'Enviar Arquivo'}
           </button>
           {progress !== null && (
             <div className={styles.progressBar}>
@@ -88,17 +89,11 @@ export default function UploadPage() {
             </div>
           )}
           {error && <p className={styles.error}>{error}</p>}
-          {explanation && (
-            <div className={styles.resultContainer}>
-              <h2 className={styles.resultTitle}>Explicação do Documento:</h2>
-              <p className={styles.resultText}>{explanation}</p>
-            </div>
-          )}
           {fileUrl && (
             <div className={styles.fileLinkContainer}>
-              <h2 className={styles.resultTitle}>Visualize seu Documento:</h2>
+              <h2 className={styles.resultTitle}>Visualize seu Arquivo:</h2>
               <a href={fileUrl} target="_blank" rel="noopener noreferrer" className={styles.fileLink}>
-                Clique aqui para visualizar o documento
+                Clique aqui para visualizar o arquivo
               </a>
             </div>
           )}
