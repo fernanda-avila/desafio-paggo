@@ -13,6 +13,7 @@ export class UploadController {
 
   constructor() {
  
+   
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
@@ -26,6 +27,7 @@ export class UploadController {
   @UseInterceptors(FileInterceptor('file', {
     dest: tempDir, 
     limits: { fileSize: 10 * 1024 * 1024 },
+    limits: { fileSize: 10 * 1024 * 1024 }, 
   }))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
@@ -39,6 +41,10 @@ export class UploadController {
 
     try {
  
+    const finalPath = path.join(finalDir, file.filename);
+    fs.renameSync(file.path, finalPath);
+
+    try {
       const { data: { text } } = await tesseract.recognize(finalPath, 'eng', {
         logger: (m) => console.log(m), 
       });

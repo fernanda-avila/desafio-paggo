@@ -2,9 +2,12 @@ import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as Tesseract from 'tesseract.js';
 import * as path from 'path';
+import { HuggingFaceService } from '../huggingface/hugging-face.service'; 
 
 @Controller('uploads')
 export class ImageUploadController {
+  constructor(private readonly huggingFaceService: HuggingFaceService) {}
+
   @Post('image')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
@@ -18,11 +21,21 @@ export class ImageUploadController {
     const ocrText = await this.extractTextFromImage(imagePath);
 
     console.log('Texto extraído:', ocrText);
+    
+    const ocrText = await this.extractTextFromImage(imagePath);
+
+    console.log('Texto extraído:', ocrText); 
+
+    const explanation = await this.huggingFaceService.explainText(ocrText);
+
+    console.log('Explicação gerada:', explanation);
 
     return {
       message: 'Arquivo carregado com sucesso',
       filename: file.filename,
       text: ocrText,
+      text: ocrText, 
+      explanation,   
     };
   }
 
@@ -35,6 +48,9 @@ export class ImageUploadController {
         'eng',
         {
           logger: (m) => console.log(m),
+        'eng', 
+        {
+          logger: (m) => console.log(m),  
         }
       );
 

@@ -6,6 +6,7 @@ import { existsSync, mkdirSync } from 'fs';
 import { ImageUploadController } from './upload/image-upload.controller';
 import { ImageController } from './upload/image.controller';
 import { UserModule } from './user/user.module';
+import { HuggingFaceService } from './huggingface/hugging-face.service'; 
 
 const uploadDir = join(__dirname, '..', 'uploads', 'image');
 if (!existsSync(uploadDir)) {
@@ -28,6 +29,9 @@ if (!existsSync(uploadDir)) {
   controllers: [
     ImageUploadController, 
     ImageController,     
+  ],
+  providers: [
+    HuggingFaceService,  
   ],
 })
 export class AppModule {}
