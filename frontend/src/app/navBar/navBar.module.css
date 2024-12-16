@@ -11,6 +11,8 @@
     display: flex;
     align-items: center;
   }
+
+  
   
   .logoutButton {
     background: none;
@@ -21,7 +23,7 @@
   }
   
   .logoutButton:hover {
-    color: #508fda; /* Cor quando o ícone é hoverizado */
+    color: #80ace2; /* Cor quando o ícone é hoverizado */
   }
   
   .logoutButton:focus {

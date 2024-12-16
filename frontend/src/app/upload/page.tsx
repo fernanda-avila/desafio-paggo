@@ -11,7 +11,7 @@ export default function UploadPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [fileUrl, setFileUrl] = useState<string | null>(null);  
-  const [ocrText, setOcrText] = useState<string | null>(null);  // Estado para armazenar o texto extraído
+  const [ocrText, setOcrText] = useState<string | null>(null);  
   const [showModal, setShowModal] = useState<boolean>(false);  
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ export default function UploadPage() {
       setError(null);
       setProgress(null);
       setFileUrl(null);  
-      setOcrText(null);  // Limpa o texto OCR quando um novo arquivo for selecionado
+      setOcrText(null);  
     }
   };
 
@@ -52,7 +52,7 @@ export default function UploadPage() {
 
       const filePath = `http://localhost:3001/uploads/image/${response.data.filename}`; 
       setFileUrl(filePath);  
-      setOcrText(response.data.text);  // Atualiza o estado com o texto extraído
+      setOcrText(response.data.text);  
       setLoading(false);
       setShowModal(true);  
 
@@ -64,6 +64,13 @@ export default function UploadPage() {
 
   const closeModal = () => {
     setShowModal(false);  
+  };
+
+  const copyToClipboard = () => {
+    if (ocrText) {
+      navigator.clipboard.writeText(ocrText);
+      alert("Texto copiado para a área de transferência!");
+    }
   };
 
   return (
@@ -103,12 +110,13 @@ export default function UploadPage() {
       {showModal && fileUrl && (
         <div className={styles.modal} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <span className={styles.close}>&times;</span>
+            <span className={styles.close} onClick={closeModal}>&times;</span>  
             <div className={styles.modalBody}>
               <img src={fileUrl} alt="Imagem carregada" className={styles.modalImage} />
               <div className={styles.modalText}>
                 <h2>Texto Extraído:</h2>
                 <p>{ocrText}</p>
+                <button onClick={copyToClipboard} className={styles.copyButton}>Copiar Texto</button>
               </div>
             </div>
           </div>

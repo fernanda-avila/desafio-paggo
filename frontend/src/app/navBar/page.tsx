@@ -19,7 +19,7 @@ export default function NavBar() {
           <Image
             src="/logo.png"
             alt="Logo"
-            width={70}
+            width={80}
             height={70}
           />
         </a>

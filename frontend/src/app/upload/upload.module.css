@@ -25,7 +25,7 @@
 }
 
 .uploadBox {
-  border: 2px dashed #76a9fa;
+  border: 2px dashed #377074;
   padding: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -54,11 +54,11 @@
 
 .fileName {
   font-size: 16px;
-  color: #76a9fa;
+  color: #3b878b;
 }
 
 .uploadButton {
-  background-color: #76a9fa;
+  background-color: #41999e;
   color: #121212;
   border: none;
   padding: 10px 20px;
@@ -75,7 +75,7 @@
 }
 
 .uploadButton:hover {
-  background-color: #508fda;
+  background-color: #5FE0E7;
 }
 
 .progressBar {
@@ -88,7 +88,7 @@
 }
 
 .progress {
-  background-color: #76a9fa;
+  background-color: #45a0a5;
   height: 100%;
   transition: width 0.4s ease;
 }
@@ -122,6 +122,7 @@
   max-height: 80%;
   overflow: auto;
   box-sizing: border-box;
+  position: relative;
 }
 
 .modalBody {
@@ -150,20 +151,32 @@
   color: #333;
 }
 
+.copyButton {
+  background-color: #41999e;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.copyButton:hover {
+  background-color: #3b878b;
+}
+
+
 .close {
   position: absolute;
-  top: 40px;
-  right:40px;
-  font-size: 40px;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
   cursor: pointer;
-  color: #76a9fa;
-  background-color: transparent;
-  border: none;
-  padding: 5px;
-  border-radius: 100%;
-  transition: background-color 0.3s;
+  z-index: 1;
 }
 
 .close:hover {
-  color: #427fe0;
+  color: #41999e;
 }
