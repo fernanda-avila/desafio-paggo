@@ -1,6 +1,6 @@
 .pageContainer {
   font-family: 'Arial', sans-serif;
-  background-color: #020202;
+  background-color: #2A2C2B;
   color: #333;
   display: flex;
   justify-content: center;
@@ -16,7 +16,7 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: #005bb5;
+  color: #3d9497;
   margin-bottom: 20px;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@
 .button {
   padding: 12px 30px;
   font-size: 1.2rem;
-  background-color: #0070f3; /* Cor do botão */
+  background-color: #4CB7BB; /* Cor do botão */
   color: white;
   border: none;
   border-radius: 50px;
@@ -44,13 +44,13 @@
 }
 
 .button:hover {
-  background-color: #005bb5;
+  background-color: #3b8f92;
   transform: scale(1.05); 
 }
 
 .button:focus {
   outline: none;
-  border: 2px solid #005bb5;
+  border: 2px solid #4CB7BB;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
