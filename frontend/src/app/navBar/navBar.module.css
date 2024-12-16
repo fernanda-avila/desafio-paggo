@@ -3,29 +3,13 @@
     justify-content: space-between;
     align-items: center;
     background-color: #2c2c2c;
-    padding: 10px 20px;
+    padding: 10px 30px;
     color: #fff;
   }
   
   .logo a {
     display: flex;
     align-items: center;
-  }
-  
-  .navLinks {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navLink {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-  }
-  
-  .navLink:hover {
-    color: #76a9fa;  /* Cor ao passar o mouse */
   }
   
   .logoutButton {

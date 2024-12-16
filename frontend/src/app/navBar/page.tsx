@@ -24,11 +24,7 @@ export default function NavBar() {
           />
         </a>
       </div>
-      <div className={styles.navLinks}>
-        <a href="/" className={styles.navLink}>Home</a>
-        <a href="/sobre" className={styles.navLink}>Sobre</a>
-        <a href="/contato" className={styles.navLink}>Contato</a>
-      </div>
+  
       {isLoggedIn && (
         <button className={styles.logoutButton} onClick={handleLogout}>
           <FiLogOut size={24} color="#76a9fa" />

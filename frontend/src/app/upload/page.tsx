@@ -98,21 +98,19 @@ export default function UploadPage() {
           )}
           {error && <p className={styles.error}>{error}</p>}
         </div>
-        
-        {/* Exibindo o texto OCR se disponível */}
-        {ocrText && (
-          <div className={styles.ocrResult}>
-            <h2>Texto Extraído:</h2>
-            <p>{ocrText}</p>
-          </div>
-        )}
       </div>
 
       {showModal && fileUrl && (
         <div className={styles.modal} onClick={closeModal}>
-          <div className={styles.modalContent}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <span className={styles.close}>&times;</span>
-            <img src={fileUrl} alt="Imagem carregada" className={styles.modalImage} />
+            <div className={styles.modalBody}>
+              <img src={fileUrl} alt="Imagem carregada" className={styles.modalImage} />
+              <div className={styles.modalText}>
+                <h2>Texto Extraído:</h2>
+                <p>{ocrText}</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

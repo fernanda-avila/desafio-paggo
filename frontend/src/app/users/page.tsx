@@ -21,11 +21,11 @@ function LoginPage() {
   
     try {
       if (isLoginMode) {
-        const response = await axios.post('http://localhost:3001/users/login', { email, password });
+        await axios.post('http://localhost:3001/users/login', { email, password });
         setSuccess('Login bem-sucedido!');
         window.location.href = '/upload'; // Redireciona para /upload após o login bem-sucedido
       } else {
-        const response = await axios.post('http://localhost:3001/users', { email, password, name });
+        await axios.post('http://localhost:3001/users', { email, password, name });
         setSuccess('Cadastro bem-sucedido! Agora faça login.');
       }
       setLoading(false);
