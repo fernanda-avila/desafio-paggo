@@ -91,12 +91,12 @@
 .eyeButton {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 57%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 25px;
   color: #5ce1e6;
 }
 
@@ -105,9 +105,7 @@
 }
 
 .inputField {
-  width: 100%;
-  padding: 10px;
-  padding-right: 40px;
+  width: 93%;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;

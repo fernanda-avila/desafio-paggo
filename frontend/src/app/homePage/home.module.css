@@ -1,9 +1,7 @@
-
-
 .pageContainer {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #c8e0f0, #d3ebf9); /* Gradiente suave */
-  color: #333;  
+  background-color: #020202;
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,17 +9,17 @@
   height: 100vh;
   text-align: center;
   padding: 30px;
-  background-size: cover;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1); /* Sombra sutil no fundo */
+  position: relative;
+  overflow: hidden;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #005bb5; 
+  color: #005bb5;
   margin-bottom: 20px;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil no título */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .description {
@@ -35,25 +33,25 @@
 .button {
   padding: 12px 30px;
   font-size: 1.2rem;
-  background-color: #0070f3;
+  background-color: #0070f3; /* Cor do botão */
   color: white;
   border: none;
-  border-radius: 50px; /* Bordas arredondadas */
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s ease-in-out; /* Efeito de hover e animação */
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil no botão */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
 }
 
 .button:hover {
   background-color: #005bb5;
-  transform: scale(1.05); /* Efeito de aumento suave */
+  transform: scale(1.05); 
 }
 
 .button:focus {
   outline: none;
-  border: 2px solid #005bb5; /* Borda ao focar */
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Destaque ao clicar */
+  border: 2px solid #005bb5;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
 @media (max-width: 768px) {
