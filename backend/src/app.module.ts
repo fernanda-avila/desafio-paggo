@@ -25,8 +25,8 @@ if (!existsSync(uploadDir)) {
     }),
   ],
   controllers: [
-    ImageUploadController,  // Controlador de upload
-    ImageController,        // Controlador para servir as imagens
+    ImageUploadController,  
+    ImageController,        
   ],
 })
 export class AppModule {}
