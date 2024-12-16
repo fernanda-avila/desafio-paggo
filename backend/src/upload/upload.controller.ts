@@ -2,9 +2,9 @@ import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as tesseract from 'tesseract.js'; // Importe o Tesseract.js
+import * as tesseract from 'tesseract.js'; 
 
-// Diretórios de armazenamento
+
 const tempDir = path.resolve(__dirname, '..', 'uploads', 'temp');
 const finalDir = path.resolve(__dirname, '..', 'uploads', 'final');
 
@@ -12,7 +12,7 @@ const finalDir = path.resolve(__dirname, '..', 'uploads', 'final');
 export class UploadController {
 
   constructor() {
-    // Verifica e cria os diretórios se não existirem
+ 
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
@@ -24,29 +24,29 @@ export class UploadController {
 
   @Post('image')
   @UseInterceptors(FileInterceptor('file', {
-    dest: tempDir, // Arquivo vai para o diretório temporário
-    limits: { fileSize: 10 * 1024 * 1024 }, // Limite de 10MB
+    dest: tempDir, 
+    limits: { fileSize: 10 * 1024 * 1024 },
   }))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
       throw new Error('Arquivo não enviado!');
     }
 
-    // Caminho do arquivo carregado
+    
     const finalPath = path.join(finalDir, file.filename);
-    // Move o arquivo para o diretório final
+ 
     fs.renameSync(file.path, finalPath);
 
     try {
-      // Usando o Tesseract.js para processar o OCR
+ 
       const { data: { text } } = await tesseract.recognize(finalPath, 'eng', {
-        logger: (m) => console.log(m), // Log do progresso
+        logger: (m) => console.log(m), 
       });
 
       return {
         message: 'Arquivo carregado com sucesso',
         filename: file.filename,
-        text: text, // Retorna o texto extraído do OCR
+        text: text, 
       };
     } catch (error) {
       console.error(error);

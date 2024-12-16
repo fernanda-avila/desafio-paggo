@@ -15,30 +15,26 @@ export class ImageUploadController {
     }
 
     const imagePath = path.join(__dirname, '..', '..', 'uploads', 'image', file.filename);
-    
-    // Extração do texto da imagem
     const ocrText = await this.extractTextFromImage(imagePath);
 
-    console.log('Texto extraído:', ocrText); // Exibe o texto extraído do OCR
+    console.log('Texto extraído:', ocrText);
 
     return {
       message: 'Arquivo carregado com sucesso',
       filename: file.filename,
-      text: ocrText,  // Retorna o texto extraído
+      text: ocrText,
     };
   }
 
-  // Função que executa o OCR
   async extractTextFromImage(imagePath: string): Promise<string> {
     try {
       console.log(`Processando a imagem: ${imagePath}`);
 
-      // Executa o Tesseract
       const { data: { text } } = await Tesseract.recognize(
         imagePath,
-        'eng', // Ou 'por' se for português
+        'eng',
         {
-          logger: (m) => console.log(m),  // Log do progresso do OCR
+          logger: (m) => console.log(m),
         }
       );
 

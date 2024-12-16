@@ -3,7 +3,6 @@ import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import { existsSync, mkdirSync } from 'fs';
-
 import { ImageUploadController } from './upload/image-upload.controller';
 import { ImageController } from './upload/image.controller';
 import { UserModule } from './user/user.module';

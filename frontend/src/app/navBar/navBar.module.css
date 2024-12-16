@@ -18,12 +18,12 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #76a9fa;  /* Cor azul do seu projeto */
+    color: #76a9fa; 
     transition: color 0.3s;
   }
   
   .logoutButton:hover {
-    color: #80ace2; /* Cor quando o ícone é hoverizado */
+    color: #80ace2; 
   }
   
   .logoutButton:focus {

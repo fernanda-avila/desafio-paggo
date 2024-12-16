@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as Tesseract from 'tesseract.js';  // Importando o Tesseract.js
+import * as Tesseract from 'tesseract.js';  
 
 @Injectable()
 export class UploadService {
@@ -8,9 +8,9 @@ export class UploadService {
       console.log("Iniciando o reconhecimento de texto na imagem...");
       const { data: { text } } = await Tesseract.recognize(
         imageBuffer,
-        'por',  // Certifique-se de ter o idioma correto
+        'por',  
         {
-          logger: (m) => console.log(m),  // Log detalhado para progressão
+          logger: (m) => console.log(m), 
         }
       );
       console.log("Texto extraído:", text);

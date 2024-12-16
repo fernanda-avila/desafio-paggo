@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './create-user.dto';
-import { LoginUserDto } from './login-user.dto';  // Novo DTO
+import { LoginUserDto } from './login-user.dto';  
 
 @Controller('users')
 export class UserController {
@@ -13,10 +13,10 @@ export class UserController {
     return this.userService.createUser(body.email, body.password, body.name);
   }
 
-  @Post('login')  // Adicionando a rota de login
-  async loginUser(@Body() body: LoginUserDto) {  // Use LoginUserDto aqui
+  @Post('login')  
+  async loginUser(@Body() body: LoginUserDto) { 
     console.log('Requisição de login recebida:', body);
-    return this.userService.loginUser(body.email, body.password);  // Verifica credenciais
+    return this.userService.loginUser(body.email, body.password);  
   }
 
   @Get()

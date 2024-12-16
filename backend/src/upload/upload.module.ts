@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
-import { UploadController } from './upload.controller';  // Verifique o nome e o caminho do arquivo
+import { UploadController } from './upload.controller';  
 import { PrismaModule } from '../../prisma/prisma.module';
 
 @Module({
   imports: [
     PrismaModule,
     MulterModule.register({
-      dest: './uploads',  // Destino para onde os arquivos serão enviados
-      limits: { fileSize: 10 * 1024 * 1024 },  // Limite de tamanho do arquivo (10MB)
+      dest: './uploads',
+      limits: { fileSize: 10 * 1024 * 1024 },  
     }),
   ],
   providers: [UploadService],

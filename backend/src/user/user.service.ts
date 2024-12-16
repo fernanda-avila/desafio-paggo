@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service'; // Certifique-se de que o caminho está certo
+import { PrismaService } from '../../prisma/prisma.service'; 
 
 @Injectable()
 export class UserService {
@@ -15,7 +15,7 @@ export class UserService {
   }
 
   async loginUser(email: string, password: string) {
-    // Verifica se o usuário existe com esse email
+    
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -24,7 +24,7 @@ export class UserService {
       throw new Error('Usuário não encontrado');
     }
 
-    // Verifica se a senha está correta (se necessário, você pode fazer uma verificação de senha com hash)
+   
     if (user.password !== password) {
       throw new Error('Senha incorreta');
     }
