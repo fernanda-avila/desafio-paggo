@@ -1,61 +1,72 @@
-/* home.module.css */
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f9;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-  }
-  
-  .content {
-    text-align: center;
-    padding: 20px;
-    max-width: 600px;
-  }
-  
+
+.pageContainer {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom, #c8e0f0, #d3ebf9); /* Gradiente suave */
+  color: #333;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+  padding: 30px;
+  background-size: cover;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1); /* Sombra sutil no fundo */
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #005bb5; 
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil no título */
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.button {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 50px; /* Bordas arredondadas */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease-in-out; /* Efeito de hover e animação */
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil no botão */
+}
+
+.button:hover {
+  background-color: #005bb5;
+  transform: scale(1.05); /* Efeito de aumento suave */
+}
+
+.button:focus {
+  outline: none;
+  border: 2px solid #005bb5; /* Borda ao focar */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Destaque ao clicar */
+}
+
+@media (max-width: 768px) {
   .title {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 20px;
   }
-  
+
   .description {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 30px;
+    font-size: 1rem;
   }
-  
+
   .button {
-    padding: 12px 30px;
+    padding: 10px 25px;
     font-size: 1.1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
   }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  @media (max-width: 600px) {
-    .title {
-      font-size: 2rem;
-    }
-  
-    .description {
-      font-size: 1rem;
-    }
-  
-    .button {
-      padding: 10px 25px;
-      font-size: 1rem;
-    }
-  }
-  
+}
